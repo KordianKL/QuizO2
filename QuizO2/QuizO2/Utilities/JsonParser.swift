@@ -17,19 +17,34 @@ class JsonParser {
         
     }
     
-    func parse(_ quizes: JSON) -> [Quiz] {
+    func parse(_ quizesJson: JSON) -> [Quiz] {
+        var quizes = [Quiz]()
+        let items = quizesJson["items"].array!
         
+        for item in items {
+            let quiz = Quiz()
+            quiz.id = item["id"].int!
+            quiz.category = item["type"].string!
+            quiz.subcategory = item["categories"]["name"].string!
+            quiz.content = item["content"].string!
+            quiz.title = item["title"].string!
+            quiz.questionsCount = item["questions"].int!
+            quiz.imageUrl = item["mainPhoto"].string!
+            quizes.append(quiz)
+        }
+        
+        return quizes
     }
     
     func parse(details: [JSON], for quizes: [Quiz]) {
         
     }
     
-    private func parse(details: JSON) -> Question {
-        
-    }
-    
-    private func parse(details: JSON) -> [Answer] {
-        
-    }
+//    private func parse(details: JSON) -> Question {
+//
+//    }
+//
+//    private func parse(details: JSON) -> [Answer] {
+//
+//    }
 }
