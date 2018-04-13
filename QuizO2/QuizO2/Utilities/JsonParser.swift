@@ -25,11 +25,11 @@ class JsonParser {
             let quiz = Quiz()
             quiz.id = item["id"].int!
             quiz.category = item["type"].string!
-            quiz.subcategory = item["categories"]["name"].string!
+            quiz.subcategory = item["categories"][0]["name"].string!
             quiz.content = item["content"].string!
             quiz.title = item["title"].string!
             quiz.questionsCount = item["questions"].int!
-            quiz.imageUrl = item["mainPhoto"].string!
+            quiz.imageUrl = item["mainPhoto"]["url"].string!
             quizes.append(quiz)
         }
         

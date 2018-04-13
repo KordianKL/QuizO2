@@ -17,6 +17,8 @@ class NetworkManager: NetworkGateway {
     
     func fetchAllItems(_ completion: @escaping (Result<[Quiz], Error>) -> Void) {
         request(endpoint: .getQuizes) { [unowned self] result in
+            let group = DispatchGroup()
+            group.enter()
             switch result {
                 case .error(_):
                     break
@@ -30,11 +32,16 @@ class NetworkManager: NetworkGateway {
                                 break
                             case .success(let json):
                                 details.append(json)
+                                if quiz == quizes.last! {
+                                    group.leave()
+                                }
                             }
                         }
                     }
-                    JsonParser.shared.parse(details: details, for: quizes)
-                    completion(Result.success(quizes))
+                    group.notify(queue: .main) {
+                        JsonParser.shared.parse(details: details, for: quizes)
+                        completion(Result.success(quizes))
+                    }
             }
         }
     }
