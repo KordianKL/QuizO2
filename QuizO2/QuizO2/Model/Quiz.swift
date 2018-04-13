@@ -7,21 +7,25 @@
 //
 
 import Foundation
+import RealmSwift
 
-class Quiz { //Gonna be Realm model, thus needs to be a class
+class Quiz: Object {
     
-    let id: Int = 666
-    let title: String = "INITIAL"
-    let content: String = "INITIAL"
-    let imageUrl: String = "INITIAL"
-    let category: String = "INITIAL"
-    let subcategory: String = "INITIAL"
-    let questionsCount: Int = 666
+    let id = 666
+    let title = "INITIAL"
+    let content = "INITIAL"
+    let imageUrl = "INITIAL"
+    let category = "INITIAL"
+    let subcategory = "INITIAL"
+    let questionsCount = 666
     let questions: [Question] = []
     let rates: [(Int, Int, String)] = []
-    var avgResult: Double = 666.666
-    var resultCount: Int = 666
-    var result: Double = 666.666
+    @objc dynamic var avgResult = 666.666
+    @objc dynamic var resultCount = 666
+    @objc dynamic var result = 666.666
     
+    override class func primaryKey() -> String? {
+        return "id"
+    }
 }
 
