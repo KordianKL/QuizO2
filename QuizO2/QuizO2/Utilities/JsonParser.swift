@@ -40,7 +40,7 @@ class JsonParser {
         for index in 0..<quizes.count {
             let quiz = quizes[index]
             let detail = details[index]
-            quiz.questions = parse(details: detail, for: quiz)
+            quiz.questions = parse(details: detail)
             let rates = detail["rates"].array!
             quiz.rates = [
                 rates[0]["content"].string!,
@@ -54,13 +54,22 @@ class JsonParser {
         }
     }
     
-    private func parse(details: JSON, for quiz: Quiz) -> [Question] {
+    private func parse(details: JSON) -> [Question] {
         var questions = [Question]()
+        let questionsJson = details["questions"].array!
+        
+        for json in questionsJson {
+            let question = Question()
+            question.imageUrl = json["image"]["url"].string
+            question.text = json["text"].string!
+            question.answers = parse(details: json["answers"].array!)
+            questions.append(question)
+        }
         
         return questions
     }
 
-    private func parse(details: JSON, for quiz: Quiz) -> [Answer] {
+    private func parse(details: [JSON]) -> [Answer] {
         var answers = [Answer]()
         
         return answers
