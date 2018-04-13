@@ -16,7 +16,27 @@ class NetworkManager: NetworkGateway {
     private let baseUrl = "http://quiz.o2.pl/api/v1/"
     
     func fetchAllItems(_ completion: @escaping (Result<[Quiz], Error>) -> Void) {
-        //TODO: make requests and handle responses
+        request(endpoint: .getQuizes) { [unowned self] result in
+            switch result {
+                case .error(_):
+                    break
+                case .success(let json):
+                    let quizes = JsonParser.shared.parse(json)
+                    var details = [JSON]()
+                    for quiz in quizes {
+                        self.request(endpoint: .getQuestions(forQuizId: quiz.id)) { result in
+                            switch result {
+                            case .error(_):
+                                break
+                            case .success(let json):
+                                details.append(json)
+                            }
+                        }
+                    }
+                    JsonParser.shared.parse(details: details, for: quizes)
+                    completion(Result.success(quizes))
+            }
+        }
     }
     
     private func request(endpoint: Endpoint, _ completion: @escaping (Result<JSON, Error>) -> Void) {
