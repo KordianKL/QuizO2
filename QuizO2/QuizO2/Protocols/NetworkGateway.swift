@@ -13,14 +13,13 @@ enum Result<V,E> {
     case error(E)
 }
 
-enum ApiError: String {
-    case noResponse = "No response from the server"
-    case other = "Other"
+enum ApiError: Error {
+    case noResponse
 }
 
 protocol NetworkGateway {
     
     associatedtype T
     
-    func fetchAllItems() -> [Result<T, ApiError>]
+    func fetchAllItems(_ completion: @escaping (Result<T, Error>) -> Void)
 }
