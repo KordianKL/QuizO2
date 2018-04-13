@@ -17,6 +17,9 @@
 		6B1194DD207FFB0000A99361 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1194DC207FFB0000A99361 /* Quiz.swift */; };
 		6B35134E2080E3CE006942E3 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B35134D2080E3CE006942E3 /* DataSource.swift */; };
 		6B3513502080FB98006942E3 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B35134F2080FB98006942E3 /* DataManager.swift */; };
+		6B35135220810F4E006942E3 /* NetworkGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B35135120810F4E006942E3 /* NetworkGateway.swift */; };
+		6B351354208115BF006942E3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B351353208115BF006942E3 /* NetworkManager.swift */; };
+		6B35135720812E53006942E3 /* JsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B35135620812E53006942E3 /* JsonParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +34,9 @@
 		6B1194DC207FFB0000A99361 /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
 		6B35134D2080E3CE006942E3 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		6B35134F2080FB98006942E3 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		6B35135120810F4E006942E3 /* NetworkGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkGateway.swift; sourceTree = "<group>"; };
+		6B351353208115BF006942E3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		6B35135620812E53006942E3 /* JsonParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonParser.swift; sourceTree = "<group>"; };
 		6CD9D9C3991B093E0F02B869 /* Pods_QuizO2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuizO2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73DAFFBD6F31EEB89AE7ABD4 /* Pods-QuizO2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuizO2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QuizO2/Pods-QuizO2.debug.xcconfig"; sourceTree = "<group>"; };
 		C543BA4843F11016F8682DE8 /* Pods-QuizO2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuizO2.release.xcconfig"; path = "Pods/Target Support Files/Pods-QuizO2/Pods-QuizO2.release.xcconfig"; sourceTree = "<group>"; };
@@ -86,6 +92,7 @@
 		6B1194C4207FAB5000A99361 /* QuizO2 */ = {
 			isa = PBXGroup;
 			children = (
+				6B35135520812E43006942E3 /* Utilities */,
 				6B35134C2080E3C0006942E3 /* Protocols */,
 				6B1FBA0E2080AD0A007F83C1 /* Data */,
 				6B1194D7207FFA3B00A99361 /* Model */,
@@ -112,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				6B35134F2080FB98006942E3 /* DataManager.swift */,
+				6B351353208115BF006942E3 /* NetworkManager.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -120,8 +128,17 @@
 			isa = PBXGroup;
 			children = (
 				6B35134D2080E3CE006942E3 /* DataSource.swift */,
+				6B35135120810F4E006942E3 /* NetworkGateway.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		6B35135520812E43006942E3 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				6B35135620812E53006942E3 /* JsonParser.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,13 +234,19 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-QuizO2/Pods-QuizO2-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-SwiftyJSON/Alamofire_SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire_SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -237,12 +260,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B351354208115BF006942E3 /* NetworkManager.swift in Sources */,
 				6B35134E2080E3CE006942E3 /* DataSource.swift in Sources */,
 				6B1194D9207FFA5400A99361 /* Answer.swift in Sources */,
 				6B1194DD207FFB0000A99361 /* Quiz.swift in Sources */,
 				6B3513502080FB98006942E3 /* DataManager.swift in Sources */,
 				6B1194DB207FFABD00A99361 /* Question.swift in Sources */,
+				6B35135720812E53006942E3 /* JsonParser.swift in Sources */,
 				6B1194C8207FAB5000A99361 /* ViewController.swift in Sources */,
+				6B35135220810F4E006942E3 /* NetworkGateway.swift in Sources */,
 				6B1194C6207FAB5000A99361 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
