@@ -13,5 +13,5 @@ protocol DataSource {
     associatedtype T
     
     func getAllItems() -> [T]
-    func save(_ items: T)
+    func save(_ items: [T])
 }
