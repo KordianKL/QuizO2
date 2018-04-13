@@ -13,6 +13,6 @@ class Answer: Object {
     
     @objc dynamic var imageUrl: String? = nil
     @objc dynamic var text: String? = nil
-    let isCorrect = RealmOptional<Bool>()
+    @objc dynamic var isCorrect = false
     
 }

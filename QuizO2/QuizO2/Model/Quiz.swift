@@ -11,8 +11,28 @@ import RealmSwift
 
 class Quiz: Object {
     
-    let questions = List<Question>()
-    let rates = List<String>()
+    var questions: [Question] {
+        get {
+            return storedQuestions.map { $0 }
+        }
+        set {
+            storedQuestions.removeAll()
+            storedQuestions.append(objectsIn: newValue)
+        }
+    }
+    
+    var rates: [String] {
+        get {
+            return storedRates.map { $0 }
+        }
+        set {
+            storedRates.removeAll()
+            storedRates.append(objectsIn: newValue)
+        }
+    }
+    
+    let storedQuestions = List<Question>()
+    let storedRates = List<String>()
     @objc dynamic var id = 666
     @objc dynamic var title = "INITIAL"
     @objc dynamic var content = "INITIAL"
@@ -26,6 +46,10 @@ class Quiz: Object {
     
     override static func primaryKey() -> String? {
         return "id"
+    }
+    
+    override static func ignoredProperties() -> [String] {
+        return ["questions", "rates"]
     }
 }
 

@@ -11,7 +11,21 @@ import RealmSwift
 
 class Question: Object {
     
+    var answers: [Answer] {
+        get {
+            return storedAnswers.map { $0 }
+        }
+        set {
+            storedAnswers.removeAll()
+            storedAnswers.append(objectsIn: newValue)
+        }
+    }
+    
     @objc dynamic var imageUrl: String? = nil
     @objc dynamic var text = "INITIAL"
-    let answers = List<Answer>()
+    let storedAnswers = List<Answer>()
+    
+    override static func ignoredProperties() -> [String] {
+        return ["answers"]
+    }
 }
