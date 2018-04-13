@@ -11,20 +11,20 @@ import RealmSwift
 
 class Quiz: Object {
     
-    let id = 666
-    let title = "INITIAL"
-    let content = "INITIAL"
-    let imageUrl = "INITIAL"
-    let category = "INITIAL"
-    let subcategory = "INITIAL"
-    let questionsCount = 666
-    let questions: [Question] = []
-    let rates: [(Int, Int, String)] = []
+    let questions = List<Question>()
+    let rates = List<String>()
+    @objc dynamic var id = 666
+    @objc dynamic var title = "INITIAL"
+    @objc dynamic var content = "INITIAL"
+    @objc dynamic var imageUrl = "INITIAL"
+    @objc dynamic var category = "INITIAL"
+    @objc dynamic var subcategory = "INITIAL"
+    @objc dynamic var questionsCount = 666
     @objc dynamic var avgResult = 666.666
     @objc dynamic var resultCount = 666
     @objc dynamic var result = 666.666
     
-    override class func primaryKey() -> String? {
+    override static func primaryKey() -> String? {
         return "id"
     }
 }

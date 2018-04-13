@@ -7,11 +7,11 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct Question {
+class Question: Object {
     
-    let imageUrl: String?
-    let text: String
-    let answers: [Answer]
-    
+    @objc dynamic var imageUrl: String? = nil
+    @objc dynamic var text = "INITIAL"
+    let answers = List<Answer>()
 }
