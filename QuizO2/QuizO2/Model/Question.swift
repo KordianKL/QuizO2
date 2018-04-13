@@ -7,11 +7,25 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct Question {
+class Question: Object {
     
-    let imageUrl: String?
-    let text: String
-    let answers: [Answer]
+    var answers: [Answer] {
+        get {
+            return storedAnswers.map { $0 }
+        }
+        set {
+            storedAnswers.removeAll()
+            storedAnswers.append(objectsIn: newValue)
+        }
+    }
     
+    @objc dynamic var imageUrl: String? = nil
+    @objc dynamic var text = "INITIAL"
+    let storedAnswers = List<Answer>()
+    
+    override static func ignoredProperties() -> [String] {
+        return ["answers"]
+    }
 }

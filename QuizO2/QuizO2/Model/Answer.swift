@@ -7,11 +7,12 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct Answer {
+class Answer: Object {
     
-    let imageUrl: String?
-    let text: String?
-    let isCorrect: Bool?
+    @objc dynamic var imageUrl: String? = nil
+    @objc dynamic var text: String? = nil
+    @objc dynamic var isCorrect = false
     
 }

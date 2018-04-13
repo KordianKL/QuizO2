@@ -7,21 +7,49 @@
 //
 
 import Foundation
+import RealmSwift
 
-class Quiz { //Gonna be Realm model, thus needs to be a class
+class Quiz: Object {
     
-    let id: Int = 666
-    let title: String = "INITIAL"
-    let content: String = "INITIAL"
-    let imageUrl: String = "INITIAL"
-    let category: String = "INITIAL"
-    let subcategory: String = "INITIAL"
-    let questionsCount: Int = 666
-    let questions: [Question] = []
-    let rates: [(Int, Int, String)] = []
-    var avgResult: Double = 666.666
-    var resultCount: Int = 666
-    var result: Double = 666.666
+    var questions: [Question] {
+        get {
+            return storedQuestions.map { $0 }
+        }
+        set {
+            storedQuestions.removeAll()
+            storedQuestions.append(objectsIn: newValue)
+        }
+    }
     
+    var rates: [String] {
+        get {
+            return storedRates.map { $0 }
+        }
+        set {
+            storedRates.removeAll()
+            storedRates.append(objectsIn: newValue)
+        }
+    }
+    
+    let storedQuestions = List<Question>()
+    let storedRates = List<String>()
+    @objc dynamic var id = 666
+    @objc dynamic var title = "INITIAL"
+    @objc dynamic var content = "INITIAL"
+    @objc dynamic var imageUrl = "INITIAL"
+    @objc dynamic var category = "INITIAL"
+    @objc dynamic var subcategory = "INITIAL"
+    @objc dynamic var questionsCount = 666
+    @objc dynamic var avgResult = 666.666
+    @objc dynamic var resultCount = 666
+    @objc dynamic var result = 666.666
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+    
+    override static func ignoredProperties() -> [String] {
+        return ["questions", "rates"]
+    }
 }
 
