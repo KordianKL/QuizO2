@@ -8,12 +8,12 @@
 
 import Foundation
 
-protocol ViewModelDelegate {
+protocol ViewModelDelegate: class {
     
     func didPrepareData()
 }
 
 protocol ViewModel {
     
-    weak var delegate: ViewModelDelegate
+    var delegate: ViewModelDelegate? { get set }
 }
