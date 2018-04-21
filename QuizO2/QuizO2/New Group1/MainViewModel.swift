@@ -26,22 +26,6 @@ class MainViewModel {
         self.delegate = delegate
     }
     
-    private func fetchAllItems() {
-        let items = dataSource.getAllItems()
-        if items.count != 0 {
-            self.items = items
-        } else {
-            networkGateway.fetchAllItems { result in
-                switch result {
-                    case .error(let error):
-                        NSLog("There was an error fetching data from the network: \(error)")
-                    case .success(let items):
-                        self.items = items
-                }
-            }
-        }
-    }
-    
 }
 
 extension MainViewModel: ViewModel {
@@ -52,5 +36,22 @@ extension MainViewModel: ViewModel {
     
     func getCount() -> Int {
         return items.count
+    }
+    
+    func refreshData() {
+        let items = dataSource.getAllItems()
+        if items.count != 0 {
+            self.items = items
+        } else {
+            networkGateway.fetchAllItems { [unowned self] result in
+                switch result {
+                case .error(let error):
+                    NSLog("There was an error fetching data from the network: \(error)")
+                case .success(let items):
+                    self.dataSource.save(items)
+                    self.items = items
+                }
+            }
+        }
     }
 }

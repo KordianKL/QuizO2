@@ -18,4 +18,5 @@ protocol ViewModel {
     var delegate: ViewModelDelegate? { get set }
     func getItemAt(_ index: Int) -> Quiz
     func getCount() -> Int
+    func refreshData()
 }

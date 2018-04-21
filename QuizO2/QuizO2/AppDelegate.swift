@@ -13,9 +13,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        let vc = MainViewController(viewModel: MainViewModel(dataSource: DataManager(), networkGateway: NetworkManager()))
+        window?.rootViewController = vc
         return true
     }
 
