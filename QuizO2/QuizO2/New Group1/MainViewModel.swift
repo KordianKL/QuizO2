@@ -8,12 +8,17 @@
 
 import Foundation
 
-class MainViewModel: ViewModel {
+class MainViewModel {
     
     weak var delegate: ViewModelDelegate?
     
     private let dataSource: DataSource
     private let networkGateway: NetworkGateway
+    private var items: [Quiz] = [Quiz]() {
+        didSet {
+            delegate?.didPrepareData()
+        }
+    }
     
     init(dataSource: DataSource, networkGateway: NetworkGateway, delegate: ViewModelDelegate? = nil) {
         self.dataSource = dataSource
@@ -21,4 +26,31 @@ class MainViewModel: ViewModel {
         self.delegate = delegate
     }
     
+    private func fetchAllItems() {
+        let items = dataSource.getAllItems()
+        if items.count != 0 {
+            self.items = items
+        } else {
+            networkGateway.fetchAllItems { result in
+                switch result {
+                    case .error(let error):
+                        NSLog("There was an error fetching data from the network: \(error)")
+                    case .success(let items):
+                        self.items = items
+                }
+            }
+        }
+    }
+    
+}
+
+extension MainViewModel: ViewModel {
+    
+    func getItemAt(_ index: Int) -> Quiz {
+        return items[index]
+    }
+    
+    func getCount() -> Int {
+        return items.count
+    }
 }
