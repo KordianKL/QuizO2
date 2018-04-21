@@ -8,10 +8,8 @@
 
 import Foundation
 
-protocol DataSource {
+protocol DataSource: class {
     
-    associatedtype T
-    
-    func getAllItems() -> [T]
-    func save(_ items: [T])
+    func getAllItems() -> [Quiz]
+    func save(_ items: [Quiz])
 }

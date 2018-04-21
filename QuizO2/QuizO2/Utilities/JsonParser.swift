@@ -37,7 +37,7 @@ class JsonParser {
     }
     
     func parse(details: [JSON], for quizes: [Quiz]) {
-        for index in 0..<quizes.count {
+        for index in 0..<details.count {
             let quiz = quizes[index]
             let detail = details[index]
             

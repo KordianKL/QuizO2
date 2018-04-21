@@ -17,9 +17,7 @@ enum ApiError: Error {
     case noResponse
 }
 
-protocol NetworkGateway {
+protocol NetworkGateway: class {
     
-    associatedtype T
-    
-    func fetchAllItems(_ completion: @escaping (Result<T, Error>) -> Void)
+    func fetchAllItems(_ completion: @escaping (Result<[Quiz], Error>) -> Void)
 }
