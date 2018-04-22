@@ -35,11 +35,11 @@ class NetworkManager: NetworkGateway {
                                 break
                             case .success(let json):
                                 details.append(json)
-                                if quiz == quizes.last! {
-                                    group.leave()
-                                }
                             }
                             semaphore.signal()
+                            if quiz == quizes.last! {
+                                group.leave()
+                            }
                         }
                     }
                     group.notify(queue: .main) {
