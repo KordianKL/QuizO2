@@ -7,13 +7,15 @@
 //
 
 import UIKit
+import CHIPageControl
 
 class PageViewController: UIPageViewController {
     
-    private let pg = UIPageViewController()
     private unowned var quiz: Quiz
-    private let questions: [Question]
     private var vcs = [UIViewController]()
+    private let questions: [Question]
+    private let pg = UIPageViewController()
+    private let pageControl = CHIPageControlJalapeno(frame: CGRect(x: 0, y:0, width: 100, height: 20))
     
     init(quiz: Quiz) {
         self.quiz = quiz
@@ -30,7 +32,22 @@ class PageViewController: UIPageViewController {
         populateViewControllers()
         delegate = self
         dataSource = self
+        setUpPageControl()
         setViewControllers([vcs[quiz.progress]], direction: .forward, animated: true, completion: nil)
+    }
+    
+    private func setUpPageControl() {
+        pageControl.numberOfPages = vcs.count
+        pageControl.radius = 4
+        pageControl.tintColor = UIColor.init(white: 0.7, alpha: 1.0)
+        pageControl.currentPageTintColor = UIColor.init(red: 0.35, green: 0.65, blue: 1.0, alpha: 1.0)
+        pageControl.padding = 6
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(pageControl)
+        NSLayoutConstraint.activate([
+            pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            pageControl.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15.0)
+        ])
     }
     
     private func populateViewControllers() {
@@ -48,23 +65,23 @@ extension PageViewController: UIPageViewControllerDelegate {
 extension PageViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        let index = vcs.index(of: viewController)!
+        let index = vcs.index(of: viewController)! - 1
         
-        guard vcs.index(of: viewController)! > 0 else {
+        guard index >= 0 else {
             return nil
         }
-        
-        return vcs[index - 1]
+        pageControl.set(progress: index, animated: true)
+        return vcs[index]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        let index = vcs.index(of: viewController)!
+        let index = vcs.index(of: viewController)! + 1
         
-        guard vcs.index(of: viewController)! < vcs.count - 1 else {
+        guard index < vcs.count else {
             return nil
         }
-        
-        return vcs[index + 1]
+        pageControl.set(progress: index, animated: true)
+        return vcs[index]
     }
     
 }

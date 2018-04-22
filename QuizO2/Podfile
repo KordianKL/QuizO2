@@ -8,6 +8,7 @@ target 'QuizO2' do
     pod 'SwiftyJSON', '~> 4.0'
     pod 'Alamofire-SwiftyJSON'
     pod 'Kingfisher', '~> 4.0'
+    pod 'CHIPageControl/Jalapeno'
   # Pods for QuizO2
 
 end
