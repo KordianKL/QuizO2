@@ -30,6 +30,7 @@ class JsonParser {
             quiz.title = item["title"].string!
             quiz.questionsCount = item["questions"].int!
             quiz.imageUrl = item["mainPhoto"]["url"].string!
+            quiz.userAnswers = [Int](repeating: 0, count: quiz.questionsCount)
             quizes.append(quiz)
         }
         

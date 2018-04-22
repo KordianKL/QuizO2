@@ -11,6 +11,16 @@ import RealmSwift
 
 class Quiz: Object {
     
+    var userAnswers: [Int] {
+        get {
+            return storedUserAnswers.map { $0 }
+        }
+        set {
+            storedUserAnswers.removeAll()
+            storedUserAnswers.append(objectsIn: newValue)
+        }
+    }
+    
     var questions: [Question] {
         get {
             return storedQuestions.map { $0 }
@@ -31,6 +41,7 @@ class Quiz: Object {
         }
     }
     
+    let storedUserAnswers = List<Int>()
     let storedQuestions = List<Question>()
     let storedRates = List<String>()
     @objc dynamic var progress = 0
@@ -51,6 +62,24 @@ class Quiz: Object {
     
     override static func ignoredProperties() -> [String] {
         return ["questions", "rates"]
+    }
+    
+    convenience init(_ object: Quiz) {
+        self.init()
+        self.userAnswers = object.userAnswers
+        self.questions = object.questions
+        self.rates = object.rates
+        self.progress = object.progress
+        self.id = object.id
+        self.title = object.title
+        self.content = object.content
+        self.imageUrl = object.imageUrl
+        self.category = object.category
+        self.subcategory = object.subcategory
+        self.questionsCount = object.questionsCount
+        self.avgResult = object.avgResult
+        self.resultCount = object.resultCount
+        self.result = object.result
     }
 }
 

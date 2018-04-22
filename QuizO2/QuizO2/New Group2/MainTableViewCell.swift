@@ -75,11 +75,19 @@ class MainTableViewCell: UITableViewCell {
     func setUpWith(_ item: Quiz) {
         titleLabel.text = item.title
         subtitleLabel.text = item.content
+        if item.result >= 0.0 {
+            summaryLabel.text = "Twój ostatni wynik to \(Int(item.result))%"
+        } else if item.progress > 0 {
+            summaryLabel.text = "Odpowiedziałeś na \(item.progress) z \(item.questionsCount) pytań!"
+        } else {
+            summaryLabel.text = "Dołącz do \(item.resultCount) osób które rozwiązały Quiz!"
+        }
         bgImage.setUpImage(with: item.imageUrl)
         setUpConstraints()
     }
     
     private func setUpConstraints() {
+        let offset = contentView.frame.width / 1.5
         bgImage.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(bgImage)
         
@@ -105,11 +113,10 @@ class MainTableViewCell: UITableViewCell {
             
             subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10.0),
             subtitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            subtitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -(contentView.frame.width / 1.5)),
+            subtitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -offset),
             subtitleLabel.heightAnchor.constraint(equalToConstant: 144.0),
             
             summaryLabel.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 15.0),
-            summaryLabel.widthAnchor.constraint(equalToConstant: contentView.frame.width / 1.15),
             summaryLabel.heightAnchor.constraint(equalToConstant: 24.0),
             summaryLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ])

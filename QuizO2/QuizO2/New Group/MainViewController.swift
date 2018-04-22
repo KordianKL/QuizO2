@@ -21,6 +21,11 @@ class MainViewController: UIViewController {
         setUpTableView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -54,7 +59,7 @@ extension MainViewController: ViewModelDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = PageViewController(quiz: viewModel.getItemAt(indexPath.row))
+        let vc = PageViewController(quiz: Quiz(viewModel.getItemAt(indexPath.row)), viewModel: viewModel as! QuizViewModel)
         present(vc, animated: true, completion: nil)
     }
     
@@ -64,7 +69,7 @@ extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)! as! MainTableViewCell
-        cell.setUpWith(viewModel.getItemAt(indexPath.row))
+        cell.setUpWith(Quiz(viewModel.getItemAt(indexPath.row)))
         return cell
     }
     

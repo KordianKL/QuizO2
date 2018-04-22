@@ -8,7 +8,8 @@
 
 import UIKit
 
-class QuestionViewController: UIViewController {
+class QuestionViewController: UIViewController, QuizHandler {
+    
     
     private let question: Question
     private let answers: [Answer]
@@ -16,8 +17,10 @@ class QuestionViewController: UIViewController {
     private var answerButtons = [UIButton]()
     private let questionImage = UIImageView()
     private let questionImageHeightConstraint: NSLayoutConstraint
+    unowned var delegate: QuizHandlerDelegate
     
-    init(question: Question) {
+    init(question: Question, delegate: QuizHandlerDelegate) {
+        self.delegate = delegate
         self.question = question
         self.answers = question.answers
         questionImageHeightConstraint = questionImage.heightAnchor.constraint(equalToConstant: 0.0)
@@ -96,7 +99,8 @@ class QuestionViewController: UIViewController {
     }
     
     @objc private func tapped(_ sender: UIButton) {
-        
+        let answerNumber = answerButtons.index(of: sender)! + 1
+        delegate.didAnswerQuestion(answerNumber)
     }
     
     private func setUpConstraints() {

@@ -12,4 +12,5 @@ protocol DataSource: class {
     
     func getAllItems() -> [Quiz]
     func save(_ items: [Quiz])
+    func update(_ item: Quiz)
 }
