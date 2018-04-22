@@ -24,4 +24,10 @@ class DataManager: DataSource {
             }
         }
     }
+    
+    func update(_ item: Quiz) {
+        try! realm.write {
+            realm.add(item, update: true)
+        }
+    }
 }

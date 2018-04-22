@@ -13,7 +13,7 @@ protocol ViewModelDelegate: class {
     func didPrepareData()
 }
 
-protocol ViewModel {
+protocol ViewModel: class {
     
     var delegate: ViewModelDelegate? { get set }
     func getItemAt(_ index: Int) -> Quiz

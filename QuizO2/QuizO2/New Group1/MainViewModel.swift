@@ -55,3 +55,10 @@ extension MainViewModel: ViewModel {
         }
     }
 }
+
+extension MainViewModel: QuizViewModel {
+    
+    func updateQuiz(_ quiz: Quiz) {
+        dataSource.update(quiz)
+    }
+}

@@ -16,8 +16,10 @@ class PageViewController: UIPageViewController {
     private let questions: [Question]
     private let pg = UIPageViewController()
     private let pageControl = CHIPageControlJalapeno(frame: CGRect(x: 0, y:0, width: 100, height: 20))
+    private unowned let viewModel: QuizViewModel
     
-    init(quiz: Quiz) {
+    init(quiz: Quiz, viewModel: QuizViewModel) {
+        self.viewModel = viewModel
         self.quiz = quiz
         self.questions = quiz.questions
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -52,7 +54,7 @@ class PageViewController: UIPageViewController {
     
     private func populateViewControllers() {
         for index in 0..<questions.count {
-            vcs.append(QuestionViewController(question: questions[index]))
+            vcs.append(QuestionViewController(question: questions[index], delegate: self))
         }
     }
 
@@ -82,6 +84,22 @@ extension PageViewController: UIPageViewControllerDataSource {
         }
         pageControl.set(progress: index, animated: true)
         return vcs[index]
+    }
+    
+}
+
+extension PageViewController: QuizHandlerDelegate {
+    
+    func didFinishQuiz() {
+        //TODO
+    }
+    
+    func didAnswerQuestion(_ number: Int) {
+        quiz.userAnswers[Int(pageControl.progress)] = number
+        if quiz.userAnswers[Int(pageControl.progress)] != 0 {
+            quiz.progress += 1
+        }
+        viewModel.updateQuiz(quiz)
     }
     
 }

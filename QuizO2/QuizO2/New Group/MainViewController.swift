@@ -54,7 +54,7 @@ extension MainViewController: ViewModelDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = PageViewController(quiz: viewModel.getItemAt(indexPath.row))
+        let vc = PageViewController(quiz: viewModel.getItemAt(indexPath.row), viewModel: viewModel as! QuizViewModel)
         present(vc, animated: true, completion: nil)
     }
     
