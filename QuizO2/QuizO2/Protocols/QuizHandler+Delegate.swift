@@ -12,6 +12,7 @@ protocol QuizHandlerDelegate: class {
     
     func didAnswerQuestion(_ number: Int)
     func didFinishQuiz()
+    func dismissVc()
 }
 
 protocol QuizHandler: class{
