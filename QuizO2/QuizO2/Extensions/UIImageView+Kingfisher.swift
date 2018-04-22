@@ -14,7 +14,6 @@ extension UIImageView {
     
     func setUpImage(with url: String) {
         let url = URL(string: url)!
-        kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "placeholder"))
         kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "placeholder")) { [unowned self] (_, _, _, _) in
             self.contentMode = .scaleAspectFill
         }
