@@ -63,5 +63,23 @@ class Quiz: Object {
     override static func ignoredProperties() -> [String] {
         return ["questions", "rates"]
     }
+    
+    convenience init(_ object: Quiz) {
+        self.init()
+        self.userAnswers = object.userAnswers
+        self.questions = object.questions
+        self.rates = object.rates
+        self.progress = object.progress
+        self.id = object.id
+        self.title = object.title
+        self.content = object.content
+        self.imageUrl = object.imageUrl
+        self.category = object.category
+        self.subcategory = object.subcategory
+        self.questionsCount = object.questionsCount
+        self.avgResult = object.avgResult
+        self.resultCount = object.resultCount
+        self.result = object.result
+    }
 }
 

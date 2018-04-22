@@ -11,7 +11,7 @@ import CHIPageControl
 
 class PageViewController: UIPageViewController {
     
-    private unowned var quiz: Quiz
+    private var quiz: Quiz
     private var vcs = [UIViewController]()
     private let questions: [Question]
     private let pg = UIPageViewController()
@@ -36,6 +36,7 @@ class PageViewController: UIPageViewController {
         dataSource = self
         setUpPageControl()
         setViewControllers([vcs[quiz.progress]], direction: .forward, animated: true, completion: nil)
+        pageControl.progress = Double(quiz.progress)
     }
     
     private func setUpPageControl() {
@@ -100,6 +101,7 @@ extension PageViewController: QuizHandlerDelegate {
             quiz.progress += 1
         }
         viewModel.updateQuiz(quiz)
+        quiz = Quiz(quiz)
     }
     
 }

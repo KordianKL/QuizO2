@@ -11,7 +11,7 @@ import UIKit
 class QuestionViewController: UIViewController, QuizHandler {
     
     
-    private unowned let question: Question
+    private let question: Question
     private let answers: [Answer]
     private let questionLabel = UILabel()
     private var answerButtons = [UIButton]()
