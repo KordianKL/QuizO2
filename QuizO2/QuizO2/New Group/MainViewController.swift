@@ -10,6 +10,7 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    private let reuseIdentifier = "mainTableViewCell"
     private var viewModel: ViewModel
     private let tableView = UITableView()
 
@@ -30,8 +31,10 @@ class MainViewController: UIViewController {
     }
     
     private func setUpTableView() {
+        tableView.register(MainTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
@@ -54,7 +57,9 @@ extension MainViewController: ViewModelDelegate {
 extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)! as! MainTableViewCell
+        cell.setUpWith(viewModel.getItemAt(indexPath.row))
+        return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -64,5 +69,9 @@ extension MainViewController: UITableViewDataSource {
 }
 
 extension MainViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 300.0
+    }
     
 }
