@@ -51,8 +51,8 @@ class PageViewController: UIPageViewController {
     }
     
     private func populateViewControllers() {
-        for _ in questions {
-            vcs.append(QuestionViewController())
+        for index in 0..<questions.count {
+            vcs.append(QuestionViewController(question: questions[index]))
         }
     }
 
