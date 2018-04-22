@@ -3,6 +3,7 @@ PODS:
   - Alamofire-SwiftyJSON (3.0.0):
     - Alamofire (~> 4.5)
     - SwiftyJSON (~> 4.0.0)
+  - CHIPageControl/Jalapeno (0.1.5)
   - Kingfisher (4.7.0)
   - Realm (3.3.2):
     - Realm/Headers (= 3.3.2)
@@ -14,6 +15,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.7)
   - Alamofire-SwiftyJSON
+  - CHIPageControl/Jalapeno
   - Kingfisher (~> 4.0)
   - RealmSwift
   - SwiftyJSON (~> 4.0)
@@ -22,6 +24,7 @@ SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - Alamofire-SwiftyJSON
+    - CHIPageControl
     - Kingfisher
     - Realm
     - RealmSwift
@@ -30,11 +33,12 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
   Alamofire-SwiftyJSON: 2b3649d57dc7bb2880fb8b86f8bb969397666916
+  CHIPageControl: 79d19a8ee2e35fa3c1da6533adb5364c77b5cfea
   Kingfisher: da6b005aa96d37698e3e4f1ccfe96a5b9bbf27d6
   Realm: d927fbf66df5532cfafc08afb5f7e53ded37b894
   RealmSwift: 4e903a494e05d866581d69ad6f7e7b879d446baf
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: 794077cc8b5360fc4ea46c50841bccb582e0eee5
+PODFILE CHECKSUM: 77b97816e0b861039be569ce1b4716e79bb56441
 
 COCOAPODS: 1.5.0

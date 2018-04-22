@@ -33,16 +33,17 @@ class Quiz: Object {
     
     let storedQuestions = List<Question>()
     let storedRates = List<String>()
-    @objc dynamic var id = 666
+    @objc dynamic var progress = 0
+    @objc dynamic var id = -1
     @objc dynamic var title = "INITIAL"
     @objc dynamic var content = "INITIAL"
     @objc dynamic var imageUrl = "INITIAL"
     @objc dynamic var category = "INITIAL"
     @objc dynamic var subcategory = "INITIAL"
-    @objc dynamic var questionsCount = 666
-    @objc dynamic var avgResult = 666.666
-    @objc dynamic var resultCount = 666
-    @objc dynamic var result = 666.666
+    @objc dynamic var questionsCount = -1
+    @objc dynamic var avgResult = -1.0
+    @objc dynamic var resultCount = -1
+    @objc dynamic var result = -1.0
     
     override static func primaryKey() -> String? {
         return "id"

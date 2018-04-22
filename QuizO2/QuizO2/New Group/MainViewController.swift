@@ -52,6 +52,12 @@ extension MainViewController: ViewModelDelegate {
     func didPrepareData() {
         tableView.reloadData()
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = PageViewController(quiz: viewModel.getItemAt(indexPath.row))
+        present(vc, animated: true, completion: nil)
+    }
+    
 }
 
 extension MainViewController: UITableViewDataSource {

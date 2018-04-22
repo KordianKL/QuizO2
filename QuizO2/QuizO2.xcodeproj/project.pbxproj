@@ -23,7 +23,9 @@
 		6B40A44F208BB211009E7759 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B40A44E208BB211009E7759 /* MainViewModel.swift */; };
 		6B40A451208BB21C009E7759 /* ViewModel+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B40A450208BB21C009E7759 /* ViewModel+Delegate.swift */; };
 		6B40A454208BBC9F009E7759 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B40A453208BBC9F009E7759 /* MainTableViewCell.swift */; };
-		6B40A458208C1822009E7759 /* UIImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B40A457208C1822009E7759 /* UIImageView+Kingfisher.swift */; };
+		6B40A458208C1822009E7759 /* UIKit+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B40A457208C1822009E7759 /* UIKit+Kingfisher.swift */; };
+		6B40A45A208CDE68009E7759 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B40A459208CDE68009E7759 /* PageViewController.swift */; };
+		6B40A45C208CE30E009E7759 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B40A45B208CE30E009E7759 /* QuestionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,7 +46,9 @@
 		6B40A44E208BB211009E7759 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		6B40A450208BB21C009E7759 /* ViewModel+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModel+Delegate.swift"; sourceTree = "<group>"; };
 		6B40A453208BBC9F009E7759 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
-		6B40A457208C1822009E7759 /* UIImageView+Kingfisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Kingfisher.swift"; sourceTree = "<group>"; };
+		6B40A457208C1822009E7759 /* UIKit+Kingfisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit+Kingfisher.swift"; sourceTree = "<group>"; };
+		6B40A459208CDE68009E7759 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		6B40A45B208CE30E009E7759 /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
 		6CD9D9C3991B093E0F02B869 /* Pods_QuizO2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuizO2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73DAFFBD6F31EEB89AE7ABD4 /* Pods-QuizO2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuizO2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QuizO2/Pods-QuizO2.debug.xcconfig"; sourceTree = "<group>"; };
 		C543BA4843F11016F8682DE8 /* Pods-QuizO2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuizO2.release.xcconfig"; path = "Pods/Target Support Files/Pods-QuizO2/Pods-QuizO2.release.xcconfig"; sourceTree = "<group>"; };
@@ -157,6 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				6B1194C7207FAB5000A99361 /* MainViewController.swift */,
+				6B40A459208CDE68009E7759 /* PageViewController.swift */,
+				6B40A45B208CE30E009E7759 /* QuestionViewController.swift */,
 			);
 			name = ViewControllers;
 			path = "New Group";
@@ -183,7 +189,7 @@
 		6B40A456208C1812009E7759 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				6B40A457208C1822009E7759 /* UIImageView+Kingfisher.swift */,
+				6B40A457208C1822009E7759 /* UIKit+Kingfisher.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -283,6 +289,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-QuizO2/Pods-QuizO2-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-SwiftyJSON/Alamofire_SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/CHIPageControl/CHIPageControl.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
@@ -292,6 +299,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire_SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CHIPageControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
@@ -315,13 +323,15 @@
 				6B1194D9207FFA5400A99361 /* Answer.swift in Sources */,
 				6B1194DD207FFB0000A99361 /* Quiz.swift in Sources */,
 				6B3513502080FB98006942E3 /* DataManager.swift in Sources */,
-				6B40A458208C1822009E7759 /* UIImageView+Kingfisher.swift in Sources */,
+				6B40A45A208CDE68009E7759 /* PageViewController.swift in Sources */,
+				6B40A458208C1822009E7759 /* UIKit+Kingfisher.swift in Sources */,
 				6B1194DB207FFABD00A99361 /* Question.swift in Sources */,
 				6B35135720812E53006942E3 /* JsonParser.swift in Sources */,
 				6B1194C8207FAB5000A99361 /* MainViewController.swift in Sources */,
 				6B35135220810F4E006942E3 /* NetworkGateway.swift in Sources */,
 				6B1194C6207FAB5000A99361 /* AppDelegate.swift in Sources */,
 				6B40A451208BB21C009E7759 /* ViewModel+Delegate.swift in Sources */,
+				6B40A45C208CE30E009E7759 /* QuestionViewController.swift in Sources */,
 				6B40A44F208BB211009E7759 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

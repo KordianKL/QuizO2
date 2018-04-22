@@ -25,16 +25,20 @@ class NetworkManager: NetworkGateway {
                 case .success(let json):
                     let quizes = JsonParser.shared.parse(json)
                     var details = [JSON]()
+                    let semaphore = DispatchSemaphore(value: 1)
                     for quiz in quizes {
                         self.request(endpoint: .getQuestions(forQuizId: quiz.id)) { result in
+                            semaphore.wait()
                             switch result {
                             case .error(_):
+                                group.leave()
                                 break
                             case .success(let json):
                                 details.append(json)
-                                if quiz == quizes.last! {
-                                    group.leave()
-                                }
+                            }
+                            semaphore.signal()
+                            if quiz == quizes.last! {
+                                group.leave()
                             }
                         }
                     }
